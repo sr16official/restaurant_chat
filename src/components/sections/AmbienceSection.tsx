@@ -26,6 +26,12 @@ const ambienceImages = [
     alt: 'Detailed view of restaurant decor with shelving and ambient lighting',
     dataAiHint: 'restaurant decor shelves',
   },
+  {
+    id: 'ambience4',
+    src: 'https://placehold.co/1200x900.png',
+    alt: 'Bartenders at the BistroZen bar area',
+    dataAiHint: 'bartenders bar',
+  },
 ];
 
 export default function AmbienceSection() {
@@ -47,19 +53,19 @@ export default function AmbienceSection() {
     <section id="ambience" className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-4xl font-bold mb-6 text-primary">
+          <div className="space-y-6">
+            <h2 className="text-4xl font-bold text-primary">
               Our Ambience
             </h2>
-            <p className="text-lg text-secondary-foreground mb-4">
+            <p className="text-lg text-secondary-foreground leading-relaxed">
               Step into a realm of warmth and sophistication at BistroZen. Our carefully curated decor blends modern elegance with cozy charm, creating an inviting atmosphere perfect for any occasion.
             </p>
-            <p className="text-lg text-secondary-foreground">
+            <p className="text-lg text-secondary-foreground leading-relaxed">
               Whether it's an intimate dinner, a celebratory gathering, or a casual rendezvous, our space is designed to make you feel right at home, yet transported to a world of culinary delight. Soft lighting, comfortable seating, and tasteful art pieces complete the experience.
             </p>
           </div>
 
-          <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-2xl group">
+          <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-2xl group">
             {ambienceImages.map((image, index) => (
               <Image
                 key={image.id}
@@ -72,6 +78,7 @@ export default function AmbienceSection() {
                   index === currentImageIndex ? "opacity-100 z-0" : "opacity-0"
                 )}
                 priority={index === 0}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
               />
             ))}
 
