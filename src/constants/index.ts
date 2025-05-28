@@ -1,35 +1,61 @@
+
 import type { ChatbotTableBookingInput } from '@/ai/flows/chatbot-table-booking';
 
 export const APP_NAME = "BistroZen";
 
-export const foodItems = [
-  { 
-    id: 1, 
-    name: 'Seared Scallops', 
-    description: 'With parsnip purée, chorizo crisp, and lemon butter.', 
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'scallops seafood'
+interface FoodImage {
+  src: string;
+  alt: string;
+  dataAiHint: string;
+}
+
+export interface FoodItem {
+  id: number;
+  name: string;
+  description: string;
+  images: FoodImage[];
+}
+
+export const foodItems: FoodItem[] = [
+  {
+    id: 1,
+    name: 'Gourmet Mushroom Pizza',
+    description: 'Artisan pizza with wild mushrooms, fresh basil, and a zesty tomato sauce.',
+    images: [{ 
+      src: 'https://placehold.co/600x400.png', 
+      alt: 'Gourmet Mushroom Pizza', 
+      dataAiHint: 'pizza gourmet mushroom' 
+    }],
   },
-  { 
-    id: 2, 
-    name: 'Filet Mignon', 
-    description: 'Grilled to perfection, served with potato gratin and red wine reduction.', 
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'steak filet mignon'
+  {
+    id: 2,
+    name: 'Filet Mignon',
+    description: 'Grilled to perfection, served with potato gratin and red wine reduction.',
+    images: [{ 
+      src: 'https://placehold.co/600x400.png', 
+      alt: 'Filet Mignon', 
+      dataAiHint: 'steak filet mignon' 
+    }],
   },
-  { 
-    id: 3, 
-    name: 'Mushroom Risotto', 
-    description: 'Creamy Arborio rice with wild mushrooms and truffle oil.', 
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'risotto mushroom'
+  {
+    id: 3,
+    name: 'Mushroom Risotto',
+    description: 'Creamy Arborio rice with wild mushrooms and truffle oil.',
+    images: [{ 
+      src: 'https://placehold.co/600x400.png', 
+      alt: 'Mushroom Risotto', 
+      dataAiHint: 'risotto mushroom' 
+    }],
   },
-  { 
-    id: 4, 
-    name: 'Lavender Crème brûlée', 
-    description: 'Classic custard dessert with a hint of lavender and caramelized sugar crust.', 
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'creme brulee dessert'
+  {
+    id: 4,
+    name: 'Lavender Crème brûlée',
+    description: 'Classic custard dessert with a hint of lavender and caramelized sugar crust.',
+    images: [{ 
+      src: 'https://placehold.co/600x400.png', 
+      alt: 'Lavender Crème brûlée', 
+      dataAiHint: 'creme brulee dessert' 
+    }],
   }
 ];
 
@@ -62,7 +88,7 @@ Location: ${contactInfo.address}
 Contact: Phone: ${contactInfo.phone}, Email: ${contactInfo.email}
 
 Menu Highlights:
-- Appetizers: Seared Scallops, Foie Gras Terrine, Burrata Salad.
+- Appetizers: Gourmet Mushroom Pizza, Foie Gras Terrine, Burrata Salad.
 - Main Courses: Filet Mignon, Pan-Seared Duck Breast, Mushroom Risotto, Catch of the Day.
 - Desserts: Lavender Crème brûlée, Chocolate Marquise, Artisan Cheese Platter.
 
@@ -92,13 +118,13 @@ We do not allow pets, except for certified service animals.
 `;
 
 export type BookingField = keyof Omit<ChatbotTableBookingInput, 'context'>;
-export type BookingState = 
-  | 'idle' 
-  | 'collectingName' 
-  | 'collectingPhone' 
-  | 'collectingDate' 
-  | 'collectingTime' 
-  | 'collectingPartySize' 
+export type BookingState =
+  | 'idle'
+  | 'collectingName'
+  | 'collectingPhone'
+  | 'collectingDate'
+  | 'collectingTime'
+  | 'collectingPartySize'
   | 'confirmingBooking';
 
 export interface ChatMessage {
