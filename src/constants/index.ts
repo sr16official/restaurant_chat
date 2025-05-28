@@ -41,12 +41,12 @@ export const foodItems: FoodItem[] = [
   },
   {
     id: 2,
-    name: 'Filet Mignon',
-    description: 'Grilled to perfection, served with potato gratin and red wine reduction.',
+    name: 'Spaghetti with Garlic Bread',
+    description: 'Classic spaghetti tossed in a rich tomato and herb sauce, served with a side of crispy garlic bread.',
     images: [{
       src: 'https://placehold.co/600x400.png',
-      alt: 'Filet Mignon',
-      dataAiHint: 'steak filet mignon'
+      alt: 'Plate of spaghetti with garlic bread',
+      dataAiHint: 'spaghetti garlic bread'
     }],
   },
   {
