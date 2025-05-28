@@ -10,25 +10,25 @@ import { cn } from '@/lib/utils';
 const ambienceImages = [
   {
     id: 'ambience1',
-    src: 'https://placehold.co/1200x900.png',
+    src: 'https://placehold.co/1200x1500.png',
     alt: 'Warm and inviting interior of BistroZen restaurant',
     dataAiHint: 'restaurant interior cozy dining',
   },
   {
     id: 'ambience2',
-    src: 'https://placehold.co/1200x900.png',
+    src: 'https://placehold.co/1200x1500.png',
     alt: 'Elegant dining area with wooden tables and ambient lighting',
     dataAiHint: 'restaurant tables elegant lighting',
   },
   {
     id: 'ambience3',
-    src: 'https://placehold.co/1200x900.png',
+    src: 'https://placehold.co/1200x1500.png',
     alt: 'Detailed view of restaurant decor with shelving and ambient lighting',
     dataAiHint: 'restaurant decor shelves',
   },
   {
     id: 'ambience4',
-    src: 'https://placehold.co/1200x900.png',
+    src: 'https://placehold.co/1200x1500.png',
     alt: 'Bartenders at the BistroZen bar area',
     dataAiHint: 'bartenders bar',
   },
@@ -65,7 +65,7 @@ export default function AmbienceSection() {
             </p>
           </div>
 
-          <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-2xl group">
+          <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-2xl group">
             {ambienceImages.map((image, index) => (
               <Image
                 key={image.id}
