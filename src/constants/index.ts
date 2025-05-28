@@ -21,11 +21,23 @@ export const foodItems: FoodItem[] = [
     id: 1,
     name: 'Gourmet Pizza',
     description: 'Artisan pizza with a medley of fresh toppings, mozzarella, and a zesty tomato sauce.',
-    images: [{
-      src: 'https://placehold.co/600x400.png',
-      alt: 'Gourmet Pizza with various toppings',
-      dataAiHint: 'artisan pizza toppings'
-    }],
+    images: [
+      {
+        src: 'https://placehold.co/600x400.png',
+        alt: 'Gourmet Pizza with various toppings',
+        dataAiHint: 'artisan pizza toppings'
+      },
+      {
+        src: 'https://placehold.co/600x400.png',
+        alt: 'Close-up of pizza slice',
+        dataAiHint: 'pizza slice cheese'
+      },
+      {
+        src: 'https://placehold.co/600x400.png',
+        alt: 'Pizza as part of a food spread',
+        dataAiHint: 'pizza food spread'
+      }
+    ],
   },
   {
     id: 2,
