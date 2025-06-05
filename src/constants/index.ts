@@ -32,7 +32,7 @@ export const foodItems: FoodItem[] = [
         alt: 'Close-up of pizza slice',
         dataAiHint: 'pizza slice cheese'
       },
-      {
+       {
         src: 'https://placehold.co/600x400.png',
         alt: 'Pizza as part of a food spread',
         dataAiHint: 'pizza food spread'
@@ -87,6 +87,14 @@ export const contactInfo = {
     { day: "Saturday - Sunday", hours: "11:00 AM - 11:00 PM" },
   ]
 };
+
+export const reviewImages = [
+  { id: 'review1', src: 'https://placehold.co/1200x800.png', alt: 'Happy customers dining', dataAiHint: 'happy customers restaurant' },
+  { id: 'review2', src: 'https://placehold.co/1200x800.png', alt: 'A beautifully presented dish', dataAiHint: 'plated dish review' },
+  { id: 'review3', src: 'https://placehold.co/1200x800.png', alt: 'Restaurant exterior at night', dataAiHint: 'restaurant exterior night' },
+  { id: 'review4', src: 'https://placehold.co/1200x800.png', alt: 'Smiling chef in kitchen', dataAiHint: 'chef kitchen smiling' },
+];
+
 
 export const RESTAURANT_CONTEXT = `
 BistroZen is a modern European restaurant focusing on fresh, seasonal ingredients and an elegant dining experience.
@@ -145,4 +153,3 @@ export interface ChatMessage {
   text: string;
   timestamp: Date;
 }
-
