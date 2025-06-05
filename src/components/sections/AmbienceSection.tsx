@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'; // Keep one import for Image
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -32,6 +32,25 @@ const ambienceImages = [
     alt: 'Bartenders at the BistroZen bar area',
     dataAiHint: 'bartenders bar',
   },
+  {
+    id: 'ambience5',
+    src: 'https://placehold.co/1200x1500.png',
+    alt: 'Outdoor seating area with plants and string lights',
+    dataAiHint: 'outdoor seating patio lights plants',
+  },
+  {
+    id: 'ambience6',
+    src: 'https://placehold.co/1200x1500.png',
+    alt: 'Close-up of table setting with cutlery and glassware',
+    dataAiHint: 'table setting cutlery glassware',
+  },
+  {
+    id: 'ambience7',
+    src: 'https://placehold.co/1200x1500.png',
+    alt: 'View of the restaurant exterior at dusk',
+    dataAiHint: 'restaurant exterior facade dusk',
+  },
+
 ];
 
 export default function AmbienceSection() {

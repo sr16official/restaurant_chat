@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -50,7 +49,7 @@ function FoodItemImageSlider({ images, itemName }: FoodItemImageSliderProps) {
         fill
         className="object-cover transition-opacity duration-300 ease-in-out"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        priority={currentImageIndex === 0} 
+        priority={currentImageIndex === 0}
       />
       {images.length > 1 && (
         <>

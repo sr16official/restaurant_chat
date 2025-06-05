@@ -1,6 +1,4 @@
-
 'use client';
-
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import type { StaticImageData } from 'next/image'; // Import StaticImageData if using local images, else string for URLs
