@@ -76,6 +76,7 @@ export const heroImages = [
   { id: 'hero2', src: 'https://placehold.co/1920x1080.png', alt: 'Artfully plated seafood', dataAiHint: 'plated seafood' },
   { id: 'hero3', src: 'https://placehold.co/1920x1080.png', alt: 'Elegant dessert', dataAiHint: 'fancy dessert' },
   { id: 'hero4', src: 'https://placehold.co/1920x1080.png', alt: 'Cozy restaurant interior', dataAiHint: 'restaurant interior' },
+  { id: 'hero5', src: 'https://placehold.co/1920x1080.png', alt: 'Elegant interior of BistroZen with warm lighting and booth seating', dataAiHint: 'restaurant interior lighting' },
 ];
 
 export const contactInfo = {
@@ -153,3 +154,5 @@ export interface ChatMessage {
   text: string;
   timestamp: Date;
 }
+
+export type { FoodImage };
