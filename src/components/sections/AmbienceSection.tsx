@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'; // Keep one import for Image
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,51 +10,65 @@ import { cn } from '@/lib/utils';
 const ambienceImages = [
   {
     id: 'ambience1',
-    src: 'https://placehold.co/1200x1500.png',
-    alt: 'Warm and inviting interior of BistroZen restaurant',
+    src: '/images/the_chatter_house_vibe1.jpg.webp',
+    alt: 'Warm and inviting interior of The Chatter House restaurant',
     dataAiHint: 'restaurant interior cozy dining',
   },
-  {
-    id: 'ambience2',
-    src: 'https://placehold.co/1200x1500.png',
-    alt: 'Elegant dining area with wooden tables and ambient lighting',
-    dataAiHint: 'restaurant tables elegant lighting',
-  },
-  {
-    id: 'ambience3',
-    src: 'https://placehold.co/1200x1500.png',
-    alt: 'Detailed view of restaurant decor with shelving and ambient lighting',
-    dataAiHint: 'restaurant decor shelves',
-  },
+
   {
     id: 'ambience4',
-    src: 'https://placehold.co/1200x1500.png',
-    alt: 'Bartenders at the BistroZen bar area',
+    src: '/images/ambeince_4.jpg',
+    alt: 'Bartenders at the The Chatter Houseer House bar area',
     dataAiHint: 'bartenders bar',
   },
   {
     id: 'ambience5',
-    src: 'https://placehold.co/1200x1500.png',
+    src: '/images/ambeince_5.jpg',
     alt: 'Outdoor seating area with plants and string lights',
     dataAiHint: 'outdoor seating patio lights plants',
   },
   {
     id: 'ambience6',
-    src: 'https://placehold.co/1200x1500.png',
+    src: '/images/the_chatter_house_vibe3.webp',
     alt: 'Close-up of table setting with cutlery and glassware',
     dataAiHint: 'table setting cutlery glassware',
   },
-  {
-    id: 'ambience7',
-    src: 'https://placehold.co/1200x1500.png',
-    alt: 'View of the restaurant exterior at dusk',
-    dataAiHint: 'restaurant exterior facade dusk',
-  },
+  
 
 ];
 
 export default function AmbienceSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const startAutoslide = () => {
+    intervalRef.current = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === ambienceImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000); // Change image every 5 seconds
+  };
+
+  const stopAutoslide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
+
+  useEffect(() => {
+    // Start autoslide when the component mounts
+    startAutoslide();
+
+    // Clear the interval when the component unmounts
+    return () => {
+      stopAutoslide();
+    };
+  }, []); // Empty dependency array means this effect runs only once on mount and cleanup on unmount
+
+  // Pause/Resume autoslide on hover
+  // (Handled by adding onMouseEnter and onMouseLeave to the container div)
+
 
   const goToPrevious = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -77,14 +91,20 @@ export default function AmbienceSection() {
               Our Ambience
             </h2>
             <p className="text-lg text-secondary-foreground leading-relaxed">
-              Step into a realm of warmth and sophistication at BistroZen. Our carefully curated decor blends modern elegance with cozy charm, creating an inviting atmosphere perfect for any occasion.
+              Step into a realm of warmth and sophistication at The Chatter House. Our carefully curated decor blends modern elegance with cozy charm, creating an inviting atmosphere perfect for any occasion.
             </p>
             <p className="text-lg text-secondary-foreground leading-relaxed">
               Whether it's an intimate dinner, a celebratory gathering, or a casual rendezvous, our space is designed to make you feel right at home, yet transported to a world of culinary delight. Soft lighting, comfortable seating, and tasteful art pieces complete the experience.
             </p>
           </div>
 
-          <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden shadow-2xl group">
+          <div
+            className="relative w-3/4 aspect-[3/4] rounded-lg overflow-hidden shadow-2xl group"
+            onMouseEnter={stopAutoslide}
+            onMouseLeave={startAutoslide}
+            ref={containerRef}
+          >
+
             {ambienceImages.map((image, index) => (
               <Image
                 key={image.id}

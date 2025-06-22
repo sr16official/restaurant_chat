@@ -1,4 +1,4 @@
-# **App Name**: BistroZen
+# **App Name**: The Chatter House
 
 ## Core Features:
 
