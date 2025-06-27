@@ -12,7 +12,90 @@ export interface FoodItem {
   name: string;
   description: string;
   images: FoodImage[];
+  hiddenOnMain?: boolean;
 }
+
+// Reservation-related types and interfaces
+export interface ReservationInput {
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  reservationDate: string;
+  reservationTime: string;
+  partySize: number;
+  specialRequests?: string;
+}
+
+export interface Reservation extends ReservationInput {
+  id: string;
+  status: 'pending' | 'confirmed' | 'cancelled' | 'completed'| 'no-show';
+  confirmationCode: string;
+  createdAt: Date;
+  updatedAt: Date;
+  adminNotes?: string;
+}
+
+// Quick Links Configuration
+export interface QuickLink {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  icon: string; // Lucide icon name
+  color: string;
+  isExternal?: boolean;
+}
+
+export const quickLinks: QuickLink[] = [
+  {
+    id: 'reservations',
+    title: 'Make a Reservation',
+    description: 'Book your table instantly',
+    href: '/reservations',
+    icon: 'Calendar',
+    color: 'bg-blue-500 hover:bg-blue-600'
+  },
+  {
+    id: 'menu',
+    title: 'View Menu',
+    description: 'Explore our delicious offerings',
+    href: '#menu',
+    icon: 'BookOpen',
+    color: 'bg-green-500 hover:bg-green-600'
+  },
+  {
+    id: 'contact',
+    title: 'Contact Us',
+    description: 'Get in touch with our team',
+    href: '#contact',
+    icon: 'Phone',
+    color: 'bg-purple-500 hover:bg-purple-600'
+  },
+  {
+    id: 'delivery',
+    title: 'Order Online',
+    description: 'Food delivery to your door',
+    href: '#delivery',
+    icon: 'Truck',
+    color: 'bg-orange-500 hover:bg-orange-600'
+  },
+  {
+    id: 'reviews',
+    title: 'Customer Reviews',
+    description: 'See what others are saying',
+    href: '#reviews',
+    icon: 'Star',
+    color: 'bg-yellow-500 hover:bg-yellow-600'
+  },
+  {
+    id: 'gallery',
+    title: 'Photo Gallery',
+    description: 'Browse our restaurant photos',
+    href: '#gallery',
+    icon: 'Camera',
+    color: 'bg-pink-500 hover:bg-pink-600'
+  }
+];
 
 export const foodItems: FoodItem[] = [
   {
@@ -148,8 +231,19 @@ export const foodItems: FoodItem[] = [
       alt: 'tostada',
       dataAiHint: 'tostada'
     }],
+  },
+  {
+    id: 9,
+    name: 'Pancake',
+    description: 'Delicious Pancake.',
+    images: [{
+      src: '/images/Pancake.jpg',
+      alt: 'Pancake',
+      dataAiHint: 'Pancake'}],
+    hiddenOnMain:true,
+
   }
-  
+
 ];
 
 export const heroImages = [
@@ -164,6 +258,7 @@ export const contactInfo = {
   address: "123 Foodie Lane, Gourmet City, FS 45678",
   phone: "(123) 456-7890",
   email: "info@thechatterhouse.com",
+  reservationEmail: "reservations@thechatterhouse.com",
   openingHours: [
     { day: "Monday - Friday", hours: "12:00 PM - 10:00 PM" },
     { day: "Saturday - Sunday", hours: "11:00 AM - 11:00 PM" },
@@ -230,6 +325,7 @@ Opening Hours:
 
 Location: ${contactInfo.address}
 Contact: Phone: ${contactInfo.phone}, Email: ${contactInfo.email}
+Reservations: ${contactInfo.reservationEmail}
 
 Menu Highlights:
 - Appetizers: Gourmet Pizza, Foie Gras Terrine, Burrata Salad
@@ -248,7 +344,7 @@ Amenities:
 
 Reservations:
 - Highly recommended, especially on weekends
-- Can be made via our chatbot, by phone, or through our website
+- Can be made via our online reservation system, chatbot, by phone, or through our website
 - For parties larger than 8, please call us directly at ${contactInfo.phone}
 - Reservations can be made up to 90 days in advance
 
@@ -300,6 +396,7 @@ export const VALIDATION_RULES = {
   MAX_ADVANCE_DAYS: 90,
   PHONE_REGEX: /^[\+]?[1-9][\d]{0,15}$/,
   TIME_REGEX: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+  EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
 };
 
 export const RESTAURANT_HOURS = {
@@ -313,6 +410,43 @@ export const RESTAURANT_HOURS = {
     CLOSE: { hours: 23, minutes: 0 }, // 11:00 PM
     LAST_ORDER: { hours: 22, minutes: 30 } // 10:30 PM
   }
+};
+
+// Time slots for reservation system
+export const generateTimeSlots = (date: Date): string[] => {
+  const slots: string[] = [];
+  const dayOfWeek = date.getDay();
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  
+  const hours = isWeekend ? RESTAURANT_HOURS.WEEKEND : RESTAURANT_HOURS.WEEKDAY;
+  const startTime = hours.OPEN.hours * 60 + hours.OPEN.minutes;
+  const endTime = hours.LAST_ORDER.hours * 60 + hours.LAST_ORDER.minutes;
+  
+  for (let time = startTime; time <= endTime; time += 30) {
+    const hour = Math.floor(time / 60);
+    const minute = time % 60;
+    const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+    slots.push(timeString);
+  }
+  
+  return slots;
+};
+
+// Reservation status configuration
+export const RESERVATION_STATUS = {
+  PENDING: { label: 'Pending', color: 'yellow', description: 'Awaiting confirmation' },
+  CONFIRMED: { label: 'Confirmed', color: 'green', description: 'Reservation confirmed' },
+  CANCELLED: { label: 'Cancelled', color: 'red', description: 'Reservation cancelled' },
+  COMPLETED: { label: 'Completed', color: 'blue', description: 'Service completed' },
+  NO_SHOW: { label: 'No Show', color: 'gray', description: 'Customer did not arrive' }
+} as const;
+
+// Admin configuration
+export const ADMIN_CONFIG = {
+  ITEMS_PER_PAGE: 20,
+  AUTO_REFRESH_INTERVAL: 30000, // 30 seconds
+  NOTIFICATION_DURATION: 5000, // 5 seconds
+  EXPORT_FORMATS: ['csv', 'excel', 'pdf'] as const
 };
 
 export type { FoodImage };

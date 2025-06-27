@@ -101,16 +101,18 @@ export default function FoodShowcaseSection() {
           Taste Our Creations
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {foodItems.map((item) => (
-            <Card key={item.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-              <FoodItemImageSlider images={item.images} itemName={item.name} />
-              <CardHeader>
-                <CardTitle className="text-2xl">{item.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <CardDescription>{item.description}</CardDescription>
-              </CardContent>
-            </Card>
+          {foodItems
+            .filter(item => !item.hiddenOnMain)
+            .map((item) => (
+              <Card key={item.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                <FoodItemImageSlider images={item.images} itemName={item.name} />
+                <CardHeader>
+                  <CardTitle className="text-2xl">{item.name}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <CardDescription>{item.description}</CardDescription>
+                </CardContent>
+              </Card>
           ))}
         </div>
       </div>

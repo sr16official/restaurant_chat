@@ -1,5 +1,5 @@
 'use client';
-
+import { quickLinks } from '@/constants';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -42,7 +42,7 @@ export default function Header() {
       setIsResendingEmail(false);
     }
   };
-
+  const reservationLink = quickLinks.find(link => link.id === 'reservations');
   return (
     <>
       <header className="bg-white shadow-sm border-b">
@@ -88,7 +88,16 @@ export default function Header() {
                 </span>
               </Link>
             </div>
-
+            
+            {reservationLink && (
+              <Link
+                href={reservationLink.href}
+                className="ml-6 inline-flex items-center px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold shadow-lg hover:scale-105 transition-transform duration-200"
+              >
+                <span className="mr-2">📅</span>
+                {reservationLink.title}
+              </Link>
+            )}
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               <Link 
