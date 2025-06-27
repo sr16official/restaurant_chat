@@ -267,7 +267,7 @@ export default function Footer() {
                   )}
                   <li>
                     <Link 
-                      href="/privacy" 
+                      href="/privacy-policy" 
                       className="group flex items-center text-gray-300 hover:text-purple-400 text-sm transition-all duration-300 transform hover:translate-x-2"
                     >
                       <LucideIcons.Shield className="mr-3 text-purple-500 group-hover:text-purple-400" size={16} />
@@ -279,7 +279,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <Link 
-                      href="/terms" 
+                      href="/terms-of-service" 
                       className="group flex items-center text-gray-300 hover:text-purple-400 text-sm transition-all duration-300 transform hover:translate-x-2"
                     >
                       <LucideIcons.FileText className="mr-3 text-purple-500 group-hover:text-purple-400" size={16} />

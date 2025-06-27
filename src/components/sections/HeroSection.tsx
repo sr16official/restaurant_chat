@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { heroImages, APP_NAME } from '@/constants';
 import { ChevronDown } from 'lucide-react';
-
+import Link from 'next/link';
 export default function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -47,14 +47,16 @@ export default function HeroSection() {
         <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto animate-fadeInUp animation-delay-300">
           Discover an unforgettable culinary journey with our exquisite European dishes.
         </p>
-        <Button 
-          size="lg" 
-          onClick={scrollToMenu} 
-          className="animate-fadeInUp animation-delay-600 bg-primary hover:bg-primary/90 text-primary-foreground"
-          aria-label="View Our Menu"
-        >
-          View Our Menu <ChevronDown className="ml-2 h-5 w-5" />
-        </Button>
+        <Link href="/menu" >
+          <Button 
+            size="lg" 
+            onClick={scrollToMenu} 
+            className="animate-fadeInUp animation-delay-600 bg-primary hover:bg-primary/90 text-primary-foreground"
+            aria-label="View Our Menu"
+          >
+            View Our Menu <ChevronDown className="ml-2 h-5 w-5" />
+          </Button>
+        </Link>
       </div>
       <style jsx>{`
         .animate-fadeInUp {
